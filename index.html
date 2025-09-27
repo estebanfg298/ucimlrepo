@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WBCD — Análisis Exploratorio</title>
+<style>
+:root { --bg:#0b1220; --card:#121a2b; --text:#e7ecf6; --muted:#9fb3c8; --accent:#7aa2ff; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 24px; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1,h2,h3 { color: var(--text); margin: 8px 0 12px; }
+p { color: var(--muted); line-height: 1.6; }
+.card { background: var(--card); border: 1px solid #1e2a44; border-radius: 16px; padding: 18px; margin: 14px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 12px; }
+.kpi { background: linear-gradient(180deg, #16233b, #0f1a30); border: 1px solid #1e2a44; border-radius: 14px; padding: 16px; }
+.kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.kpi .value { font-size: 28px; font-weight: 700; margin-top: 6px; }
+.tbl { width: 100%; border-collapse: collapse; background: #0f1729; border-radius: 12px; overflow: hidden; }
+.tbl th, .tbl td { border: 1px solid #1e2a44; padding: 8px 10px; text-align: right; color: var(--text); }
+.tbl th { background: #131f36; text-align: center; }
+.figure { padding: 10px; border-radius: 12px; border: 1px solid #1e2a44; background: #0f1729; margin: 14px 0; }
+.figure img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.figure h3 { margin: 0 0 8px; font-size: 16px; }
+a.button { display: inline-block; padding: 10px 14px; background: var(--accent); color: #0a1020; text-decoration: none; border-radius: 10px; font-weight: 700; }
+.links a { margin-right: 10px; }
+footer { color: var(--muted); margin-top: 24px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>WBCD — Análisis Exploratorio</h1>
+  <p>Este dashboard resume la Fase I (preprocesamiento) y Fase II (EDA) del Wisconsin Breast Cancer Diagnostic (569 registros, 31 variables tras preprocesamiento).</p>
+
+  <div class="grid">
+    <div class="kpi">
+      <div class="label">Filas</div>
+      <div class="value">569</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Columnas</div>
+      <div class="value">31</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Benignos (0)</div>
+      <div class="value">357</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Malignos (1)</div>
+      <div class="value">212</div>
+    </div>
+  </div>
+
+  <div class="card links">
+    <a class="button" href="WBCD_clean.csv" download>Descargar CSV limpio</a>
+    <a class="button" href="WBCD_Informe.docx" download>Informe Word</a>
+  </div>
+
+  <div class="card">
+    <h2>Top features por correlación absoluta con la etiqueta</h2>
+    <table class="tbl">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>corr_abs_con_diagnosis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>worst concave points</th>
+      <td>0.793566</td>
+    </tr>
+    <tr>
+      <th>worst perimeter</th>
+      <td>0.782914</td>
+    </tr>
+    <tr>
+      <th>mean concave points</th>
+      <td>0.776614</td>
+    </tr>
+    <tr>
+      <th>worst radius</th>
+      <td>0.776454</td>
+    </tr>
+    <tr>
+      <th>mean perimeter</th>
+      <td>0.742636</td>
+    </tr>
+    <tr>
+      <th>worst area</th>
+      <td>0.733825</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <div class="card">
+    <h2>Estadísticas descriptivas — Top features</h2>
+    <table class="tbl">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>worst concave points</th>
+      <td>569.0</td>
+      <td>0.1146</td>
+      <td>0.0657</td>
+      <td>0.00</td>
+      <td>0.0649</td>
+      <td>0.0999</td>
+      <td>0.1614</td>
+      <td>0.2910</td>
+    </tr>
+    <tr>
+      <th>worst perimeter</th>
+      <td>569.0</td>
+      <td>107.2612</td>
+      <td>33.6025</td>
+      <td>50.41</td>
+      <td>84.1100</td>
+      <td>97.6600</td>
+      <td>125.4000</td>
+      <td>251.2000</td>
+    </tr>
+    <tr>
+      <th>mean concave points</th>
+      <td>569.0</td>
+      <td>0.0489</td>
+      <td>0.0388</td>
+      <td>0.00</td>
+      <td>0.0203</td>
+      <td>0.0335</td>
+      <td>0.0740</td>
+      <td>0.2012</td>
+    </tr>
+    <tr>
+      <th>worst radius</th>
+      <td>569.0</td>
+      <td>16.2692</td>
+      <td>4.8332</td>
+      <td>7.93</td>
+      <td>13.0100</td>
+      <td>14.9700</td>
+      <td>18.7900</td>
+      <td>36.0400</td>
+    </tr>
+    <tr>
+      <th>mean perimeter</th>
+      <td>569.0</td>
+      <td>91.9690</td>
+      <td>24.2990</td>
+      <td>43.79</td>
+      <td>75.1700</td>
+      <td>86.2400</td>
+      <td>104.1000</td>
+      <td>188.5000</td>
+    </tr>
+    <tr>
+      <th>worst area</th>
+      <td>569.0</td>
+      <td>880.5831</td>
+      <td>569.3570</td>
+      <td>185.20</td>
+      <td>515.3000</td>
+      <td>686.5000</td>
+      <td>1084.0000</td>
+      <td>4254.0000</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <div class="card">
+    <h2>Gráficos</h2>
+    <div class="figure"><h3>Distribución de clases</h3><img src="/mnt/data/eda_clases.png" alt="Distribución de clases"></div><div class="figure"><h3>Matriz de correlación (top features + diagnosis)</h3><img src="/mnt/data/corr_top_features.png" alt="Matriz de correlación (top features + diagnosis)"></div><div class="figure"><h3>Histograma: mean concave points</h3><img src="/mnt/data/hist_mean_concave_points.png" alt="Histograma: mean concave points"></div><div class="figure"><h3>Histograma: mean perimeter</h3><img src="/mnt/data/hist_mean_perimeter.png" alt="Histograma: mean perimeter"></div><div class="figure"><h3>Histograma: worst area</h3><img src="/mnt/data/hist_worst_area.png" alt="Histograma: worst area"></div><div class="figure"><h3>Histograma: worst concave points</h3><img src="/mnt/data/hist_worst_concave_points.png" alt="Histograma: worst concave points"></div><div class="figure"><h3>Histograma: worst perimeter</h3><img src="/mnt/data/hist_worst_perimeter.png" alt="Histograma: worst perimeter"></div><div class="figure"><h3>Histograma: worst radius</h3><img src="/mnt/data/hist_worst_radius.png" alt="Histograma: worst radius"></div><div class="figure"><h3>Boxplot por clase: mean concave points</h3><img src="/mnt/data/box_mean_concave_points.png" alt="Boxplot por clase: mean concave points"></div><div class="figure"><h3>Boxplot por clase: mean perimeter</h3><img src="/mnt/data/box_mean_perimeter.png" alt="Boxplot por clase: mean perimeter"></div><div class="figure"><h3>Boxplot por clase: worst area</h3><img src="/mnt/data/box_worst_area.png" alt="Boxplot por clase: worst area"></div><div class="figure"><h3>Boxplot por clase: worst concave points</h3><img src="/mnt/data/box_worst_concave_points.png" alt="Boxplot por clase: worst concave points"></div><div class="figure"><h3>Boxplot por clase: worst perimeter</h3><img src="/mnt/data/box_worst_perimeter.png" alt="Boxplot por clase: worst perimeter"></div><div class="figure"><h3>Boxplot por clase: worst radius</h3><img src="/mnt/data/box_worst_radius.png" alt="Boxplot por clase: worst radius"></div>
+  </div>
+
+  <footer>
+    Generado automáticamente. Para ver/servir este dashboard en GitHub Pages, sube todos los archivos a tu repo y habilita Pages en la carpeta raíz (branch <em>main</em>).
+  </footer>
+</div>
+</body>
+</html>
